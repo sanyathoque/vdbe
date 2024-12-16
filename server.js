@@ -98,7 +98,7 @@ setInterval(async () => {
 }, 5000);
 
 // API endpoints
-app.post(process.env.API_DATA_ENDPOINT + '/api/data', (req, res) => {
+app.post('/api/data', (req, res) => {
   const data = req.body;
   console.log('Received data:', JSON.stringify(data, null, 2));
   // Process the data as needed
@@ -108,9 +108,11 @@ app.post(process.env.API_DATA_ENDPOINT + '/api/data', (req, res) => {
 });
 
 // Route to receive updatedStatus from App.js
-app.post(process.env.API_DATA_ENDPOINT + '/api/update-status', (req, res) => {
+app.post('/api/update-status', (req, res) => {
   const updatedStatus = req.body;
   console.log('Received updatedStatus:', updatedStatus);
   // Process the updatedStatus as needed
+
+  // Send a response back to the client
   res.status(200).json({ message: 'Status updated successfully' });
 });
