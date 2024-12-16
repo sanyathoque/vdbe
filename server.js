@@ -20,10 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+app.use(cors());
 // WebSocket server using environment variable for port
 const wss = new WebSocket.Server({ port: process.env.WEBSOCKET_PORT || 8080 });
 
