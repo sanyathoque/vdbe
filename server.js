@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const User = require('./model/userModel');
 const Gear = require('./model/gearModel');
 const EngineIconColor = require('./model/engineIconColorModel');
+const http = require('http');
 
 dotenv.config();
 
@@ -22,8 +23,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static('dist'));
-// WebSocket server using environment variable for port
-const wss = new WebSocket.Server({ port: process.env.WEBSOCKET_PORT || 8080 });
+
+const server = http.createServer(app);
+
+// WebSocket server
+const wss = new WebSocket.Server({ server });
+
+server.listen(process.env.PORT || 5000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+});
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
@@ -106,6 +114,3 @@ app.post(process.env.API_DATA_ENDPOINT + '/api/update-status', (req, res) => {
   // Process the updatedStatus as needed
   res.status(200).json({ message: 'Status updated successfully' });
 });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
