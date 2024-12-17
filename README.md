@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/483ad951-32e0-4e12-a26f-3ef0ca625fc7)
+
 Overview
 This backend sets up a real-time, bi-directional communication channel between a web client and the server via WebSockets and Express. The code also seamlessly integrates with MongoDB via Mongoose to persist incoming data, including gear states, engine icon colors, and user updates. It features a periodic broadcasting mechanism that updates connected clients at regular intervals, simulating real-time sensor data or state changes (e.g., changing gear states, toggling engine icon color).
 
